@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 
 
 app.post('/doorbell', (request, response) => {
-  const url = 'https://hooks.slack.com/services/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';
+  const url = process.env.SLACK_URL;
   const sent = moment(request.body.timeStamp).format('MM/YY/DD - HH:mm');
   const message = request.body.message;
   const data = {
@@ -20,7 +20,7 @@ app.post('/doorbell', (request, response) => {
 
 app.get('/', (request, response) => response.render(''));
 
-const PORT = 8000;
+const PORT = process.env.PORT || 80;
 app.listen(PORT, () => {
   console.log(`app listening on port: ${PORT}`);
 });
